@@ -1,5 +1,3 @@
-/*Super specific selectors were used in this file to be sure and override any bootstrap madness.*/
-
 .menu {
     list-style: none;
     border-bottom: 0.1em solid black;
