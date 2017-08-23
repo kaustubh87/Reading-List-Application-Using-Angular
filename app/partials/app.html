@@ -1,20 +1,29 @@
-<div class="row">
+<h1>Angular Reading List</h1>
+<div class="row" ng-controller="ReadingListController">
     <button class="btn btn-default">Create Review</button>
     <hr />
     <hr />
 
-    <ul classs="list-unstyled col-sm-8">
-        <li class="book row">
+    <ul class="list-unstyled col-sm-8">
+        <li class="book row" ng-repeat="book in books">
             <aside class="col-sm-3">
-                <a href="http://www.amazon.com/gp/product/0553593714">
-                    <img ng-src="http://images.amazon.com/images/P/0553593714.01.ZTZZZZZZ.jpg" />
+                <a href="http://www.amazon.com/gp/product/{{book.isbn}}">
+                    <img ng-src="http://images.amazon.com/images/P/{{book.isbn}}.01..jpg" class="full" />
                 </a>
-                <p class="goodRating rating">5/5</p>
+                <p class="goodRating rating">{{book.rating}}</p>
             </aside>
             <div class="col-sm-9">
-                <h3><a href="http://www.amazon.com/gp/product/0553593714">Book Title</a></h3>
-
+                <h3><a href="http://www.amazon.com/gp/product/{{book.isbn}}">{{book.title}}</a></h3>
+                <cite class="text-muted">{{book.title}}</cite>
+                <p>{{book.review}}</p>
+                <ul class="list-unstyled">
+                    <li>
+                        <span class="label label-primary" ng-repeat="(genre, state) in book.genres" ng-show="state">
+                            {{genre}}</span>
+                    </li>
+                </ul>
             </div>
+        </li>
     </ul>
 
 </div>
