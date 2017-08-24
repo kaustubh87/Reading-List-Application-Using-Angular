@@ -1,22 +1,18 @@
 <form name="reviewForm" class="form-horizontal">
     <section class="row well live-preview">
         <aside class="col-sm-3">
-            <a href="http://www.amazon.com/gp/product/0553593714">
-                <img src="http://images.amazon.com/images/P/0553593714.01.ZTZZZZZZ.jpg" class="full" />
+            <a href="http://www.amazon.com/gp/product/{{book.isbn}}">
+                <img src="http://images.amazon.com/images/P/{{book.isbn}}.01.ZTZZZZZZ.jpg" class="full" />
             </a>
-            <p>5/5</p>
+            <p>{{book.rating}}/5</p>
         </aside>
 
         <div class="col-sm-9">
-            <h3><a href="http://www.amazon.com/gp/product/0553593714"> Book Title</a></h3>
-            <cite class="text-muted">Written by Author</cite>
-            <p>No review yet.</p>
+            <h3><a href="http://www.amazon.com/gp/product/{{book.title}}">{{book.title}}</a></h3>
+            <cite class="text-muted">Written by {{book.author}}</cite>
+            <p>{{book.review}}</p>
 
-            <ul class="list-unstyled">
-                <li>
-                    <span class="label label-primary">genre</span>
-                </li>
-            </ul>
+            <book-genres genres="book.genres"></book-genres>
         </div>
     </section>
 
@@ -25,28 +21,28 @@
         <fieldset class="form-group">
             <label for="title" class="col-sm-2 control-label">Title: </label>
             <span class="col-sm-9">
-                <input type="text" class="form-control" id="title" placeholder="Book Title">
+                <input type="text" class="form-control" id="title" placeholder="Book Title" ng-model="book.title">
             </span>
         </fieldset>
 
         <fieldset class="form-group">
             <label for="isbn" class="control-label col-sm-2">ISBN: </label>
             <span class="col-sm-9">
-                <input type="text" id="isbn" class="form-control" maxlength="10" placeholder="ISBN-10">
+                <input type="text" id="isbn" class="form-control" maxlength="10" placeholder="ISBN-10" ng-model="book.isbn">
             </span>
         </fieldset>
 
         <fieldset class="form-group">
             <label for="name" class="control-label col-sm-2">Author: </label>
             <span class="col-sm-9">
-                <input type="text" id="author" class="form-control" placeholder="Name of the Author">
+                <input type="text" id="author" class="form-control" placeholder="Name of the Author" ng-model="book.author">
             </span>
         </fieldset>
 
         <fieldset class="form-group">
             <label for="review" class="control-label col-sm-2">Review: </label>
             <span class="col-sm-9">
-                <textarea id="review" class="form-control" col="30" rows="3" placeholder="Book Review">
+                <textarea id="review" class="form-control" col="30" rows="3" placeholder="Book Review" ng-model="book.review">
                 </textarea>
                 </span>
         </fieldset>
@@ -54,7 +50,7 @@
         <fieldset class="form-group">
             <label for="rating" class="control-label col-sm-2">Rating: </label>
             <span class="col-sm-9">
-                <select class="form-control" id="rating" value="5">
+                <select class="form-control" id="rating" value="5" ng-model="book.rating">
                     <option>5</option>
                     <option>4</option>
                     <option>3</option>
@@ -67,9 +63,9 @@
         <fieldset class="form-group">
             <label class="control-label col-sm-2">Genre: </label>
             <div class="genre">
-                <label for="genre" class="form-control genre-label">
-                    <input type="checkbox" name="genre" id="genre" />
-                    genre
+                <label for="{{genre}}" class="form-control genre-label" ng-repeat="genre in genres">
+                    <input type="checkbox" name="genre" id="{{genre}}" ng-model="book.genres[genre]"/>
+                    {{genre}}
                 </label>
             </div>
         </fieldset>
