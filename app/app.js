@@ -7,6 +7,12 @@
         .controller('ReadingListController', function($scope) {
             $scope.books = books;
             $scope.genres = genres;
+            $scope.addReview = function() {
+                books.push($scope.book);
+                $scope.book = { genres: {} };
+
+                form.$setPristine();
+            };
         })
         .directive('bookGenres', function() {
             return {
